@@ -10,9 +10,13 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+const auth = require('./routes/auth');
 const recipes = require('./routes/recipes');
+const users = require('./routes/users');
 
 app.use('/api/recipes', recipes);
+app.use('/api/auth', auth);
+app.use('/api/users', users);
 
 const PORT = process.env.PORT || 5000;
 
