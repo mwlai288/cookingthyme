@@ -7,12 +7,12 @@ const RecipeSchema = new mongoose.Schema({
 		required: [true, 'Please enter a name']
 	},
 	ingredients: {
-		type: Array,
+		type: String,
 		trim: true,
 		required: [true, 'Please add the ingredients']
 	},
 	instructions: {
-		type: Array,
+		type: String,
 		trim: true,
 		required: [true, 'Please enter instructions']
 	},
@@ -21,4 +21,5 @@ const RecipeSchema = new mongoose.Schema({
 		trim: true
 	}
 });
+
 module.exports = mongoose.model('Recipe', RecipeSchema);
