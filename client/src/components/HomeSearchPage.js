@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 
-const HomeSearchPage = (props) => {
+const HomeSearchPage = ({ searchRecipes }) => {
 	const [search, setSearch] = useState('');
 
 	const onChange = (e) => setSearch(e.target.value);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		props.searchRecipes(search);
+		searchRecipes(search);
 		setSearch('');
 	};
+
 	return (
 		<div>
 			<h1>Cooking Thyme Cookbook</h1>

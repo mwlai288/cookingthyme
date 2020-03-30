@@ -9,7 +9,7 @@ const RecipeItems = (props) => {
 		<div>
 			Recipe: {strMeal}
 			<Link to={`/${idMeal}`}>
-				<img src={strMealThumb} alt={strMeal} />
+				<img src={strMealThumb} alt={strMeal} className="meal-image" />
 			</Link>
 		</div>
 	);
