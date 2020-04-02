@@ -6,6 +6,10 @@ import HomeSearchPage from './components/HomeSearchPage';
 import RecipeItems from './components/RecipeItems';
 import Recipe from './components/Recipe';
 import ErrorPage from './components/ErrorPage';
+import Dashboard from './components/Dashboard';
+
+import RecipeState from './context/recipes/RecipeState';
+import AuthState from './context/auth/AuthState';
 
 const App = () => {
 	const [recipes, setRecipes] = useState([]);
@@ -34,30 +38,35 @@ const App = () => {
 		);
 
 	return (
-		<Router>
-			<Switch>
-				<Route
-					exact
-					path="/"
-					render={(props) => (
-						<Fragment>
-							<HomeSearchPage searchRecipes={searchRecipes} />
-							{showResults}
-						</Fragment>
-					)}
-				/>
-				<Route
-					path="/:id"
-					render={(props) => (
-						<Recipe
-							{...props}
-							getSelectedRecipe={getSelectedRecipe}
-							singleRecipe={singleRecipe}
+		<AuthState>
+			<RecipeState>
+				<Router>
+					<Switch>
+						<Route
+							exact
+							path="/"
+							render={(props) => (
+								<Fragment>
+									<HomeSearchPage searchRecipes={searchRecipes} />
+									{showResults}
+								</Fragment>
+							)}
 						/>
-					)}
-				/>
-			</Switch>
-		</Router>
+						<Route path="/dashboard" component={Dashboard} />
+						<Route
+							path="/:id"
+							render={(props) => (
+								<Recipe
+									{...props}
+									getSelectedRecipe={getSelectedRecipe}
+									singleRecipe={singleRecipe}
+								/>
+							)}
+						/>
+					</Switch>
+				</Router>
+			</RecipeState>
+		</AuthState>
 	);
 };
 

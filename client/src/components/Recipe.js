@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Login from './Login';
+import Login from './login/Login';
 
 const Recipe = ({ getSelectedRecipe, singleRecipe, match }) => {
 	const [loggedIn, setLoggedIn] = useState(false);
