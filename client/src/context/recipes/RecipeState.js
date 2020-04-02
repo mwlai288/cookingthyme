@@ -11,7 +11,6 @@ import {
 
 const RecipeState = (props) => {
 	const initialState = {
-		show: false,
 		recipes: [
 			{
 				id: 1,

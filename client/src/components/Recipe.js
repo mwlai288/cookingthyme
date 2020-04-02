@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Login from './login/Login';
+import AuthContext from '../context/auth/authContext';
 
 const Recipe = ({ getSelectedRecipe, singleRecipe, match }) => {
-	const [loggedIn, setLoggedIn] = useState(false);
-	const [show, setShow] = useState(false);
+	const authContext = useContext(AuthContext);
 
 	useEffect(() => {
 		getSelectedRecipe(match.params.id);
+		authContext.loadUser();
 		//eslint-disable-next-line
 	}, []);
-
-	const showModal = () => {
-		setShow(!show);
-	};
 
 	const ingredients = [];
 
@@ -37,13 +34,11 @@ const Recipe = ({ getSelectedRecipe, singleRecipe, match }) => {
 			{ingredients.join(', ')}
 			<h3>Instructions</h3> {strInstructions}
 			<div>
-				{loggedIn === true ? (
-					<button>Save Recipe</button>
-				) : (
-					<button onClick={showModal}>Login in to Save</button>
-				)}
+				<button>Save Recipe</button>
+
+				<button>Login in to Save</button>
 			</div>
-			{show && <Login showModal={showModal} />}
+			<Login />
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 
 const Register = (props) => {
@@ -13,7 +13,11 @@ const Register = (props) => {
 	const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
 	const authContext = useContext(AuthContext);
-	const { register } = authContext;
+	const { register, isAuthenticated } = authContext;
+
+	useEffect(() => {
+		console.log(isAuthenticated);
+	}, [isAuthenticated]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
