@@ -10,8 +10,7 @@ import {
 	AUTH_ERROR,
 	LOGIN_SUCCESS,
 	LOGIN_FAIL,
-	LOGOUT,
-	CLEAR_ERRORS
+	LOGOUT
 } from '../types';
 
 const AuthState = (props) => {
@@ -57,7 +56,7 @@ const AuthState = (props) => {
 
 			loadUser();
 		} catch (err) {
-			console.log(err);
+			console.log(err.response);
 			dispatch({
 				type: REGISTER_FAIL,
 				payload: err.response.data.msg
@@ -85,17 +84,14 @@ const AuthState = (props) => {
 		} catch (err) {
 			console.log(err);
 			dispatch({
-				type: REGISTER_FAIL,
+				type: LOGIN_FAIL,
 				payload: err.response.data.msg
 			});
 		}
 	};
 
 	// Logout
-
-	const logout = () => {
-		console.log('logout');
-	};
+	const logout = () => dispatch({ type: LOGOUT });
 
 	// Clear Errors
 	const clearErrors = () => {

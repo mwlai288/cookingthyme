@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-
-const User = require('../models/User');
+// const upload = require('../config/fileDB');
 const Recipe = require('../models/Recipe');
 
 // @route   GET api/recipes
@@ -18,18 +17,17 @@ router.get('/', auth, async (req, res) => {
 	}
 });
 
-// @route   POST api/users
+// @route   POST api/recipes
 // @desc    Post a recipe
 // @access  Private
 router.post('/', auth, async (req, res) => {
-	const { recipeName, ingredients, instructions, photo } = req.body;
+	const { recipeName, ingredients, instructions } = req.body;
 
 	try {
 		const newRecipe = new Recipe({
 			recipeName,
 			ingredients,
 			instructions,
-			photo,
 			user: req.user.id
 		});
 
@@ -42,6 +40,13 @@ router.post('/', auth, async (req, res) => {
 	}
 });
 
+// @route   POST api/recipes
+// @desc    Post the photo file
+// @access  Private
+// router.post('/', [auth, upload.single('file')], (req, res) => {
+// 	res.json({ file: req.file });
+// });
+
 // @route   PUT api/users
 // @desc    Edit a recipe
 // @access  Private
@@ -53,7 +58,7 @@ router.put('/:id', auth, async (req, res) => {
 	if (recipeName) recipeFields.recipeName = recipeName;
 	if (ingredients) recipeFields.ingredients = ingredients;
 	if (instructions) recipeFields.instructions = instructions;
-	if (photo) recipeFields.photo = photo;
+	// if (photo) recipeFields.photo = photo;
 
 	try {
 		let recipe = await Recipe.findById(recipeId);
@@ -65,9 +70,11 @@ router.put('/:id', auth, async (req, res) => {
 			return res.status(401).json({ msg: 'Not authorized' });
 		}
 
-		recipe = await Recipe.findByIdAndUpdate(recipeId, {
-			$set: recipeFields
-		});
+		recipe = await Recipe.findByIdAndUpdate(
+			recipeId,
+			{ $set: recipeFields },
+			{ new: true }
+		);
 
 		res.json(recipe);
 	} catch (err) {
