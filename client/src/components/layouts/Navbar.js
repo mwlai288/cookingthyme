@@ -1,9 +1,9 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import AuthContext from '../context/auth/authContext';
-import RecipeContext from '../context/recipe/recipeContext';
+import AuthContext from '../../context/auth/authContext';
+import RecipeContext from '../../context/recipe/recipeContext';
 
-const Navbar = ({ title, icon }) => {
+const Navbar = ({ toggleHamburger }) => {
 	const authContext = useContext(AuthContext);
 	const recipeContext = useContext(RecipeContext);
 	const { isAuthenticated, logout, loadUser } = authContext;
@@ -27,7 +27,7 @@ const Navbar = ({ title, icon }) => {
 					<Link to="/">Home</Link>
 				</span>
 				<a onClick={onLogout} href="#!">
-					<span className="hide-sm">Logout</span>
+					<span>Logout</span>
 				</a>
 			</li>
 		</Fragment>
@@ -45,12 +45,19 @@ const Navbar = ({ title, icon }) => {
 	);
 
 	return (
-		<div className="navbar bg-primary">
-			<h1>
+		<nav className="navbar">
+			<h1 className="navbar__title">
 				<Link to="/">Home</Link>
 			</h1>
-			<ul>{isAuthenticated ? authLinks : guestLinks}</ul>
-		</div>
+			<div onClick={toggleHamburger} href="#" className="navbar__hamburger">
+				<span className="bar"></span>
+				<span className="bar"></span>
+				<span className="bar"></span>
+			</div>
+			<div className="navbar__links">
+				<ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+			</div>
+		</nav>
 	);
 };
 
