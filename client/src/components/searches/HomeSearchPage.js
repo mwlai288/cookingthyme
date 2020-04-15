@@ -9,7 +9,7 @@ const HomeSearchPage = () => {
 
 	const recipeContext = useContext(RecipeContext);
 
-	const { searchRecipes, searchedRecipes, clearInfo } = recipeContext;
+	const { searchRecipes, searchedRecipes } = recipeContext;
 
 	const onChange = (e) => setSearch(e.target.value);
 
@@ -20,7 +20,7 @@ const HomeSearchPage = () => {
 	};
 
 	return (
-		<div>
+		<div className="search-results">
 			<h1>Cooking Thyme Cookbook</h1>
 			<form onSubmit={onSubmit}>
 				<input
@@ -29,13 +29,14 @@ const HomeSearchPage = () => {
 					placeholder="Search Recipes"
 					value={search}
 					onChange={onChange}
+					className="search-results__form"
 				/>
 				<input type="submit" value="Search" />
 			</form>
 			{searchedRecipes !== null ? (
-				<div>
+				<div className="search-results__container">
 					{searchedRecipes.map((recipe) => (
-						<div key={recipe.idMeal} className="item">
+						<div key={recipe.idMeal} className="search-results__item">
 							<RecipeItems recipe={recipe} />
 						</div>
 					))}

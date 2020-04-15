@@ -31,18 +31,26 @@ const Recipe = ({ match }) => {
 	if (loading) return <Spinner />;
 
 	return (
-		<Fragment>
-			<h1>Meal Name</h1> <span>{strMeal}</span>
-			<img src={strMealThumb} alt={strMeal} className="meal-image" />
-			<h3>Ingredients</h3>
-			{ingredients.join(', ')}
-			<h3>Instructions</h3> {strInstructions}
+		<div className="recipe-info">
 			<div>
-				<button>Save Recipe</button>
-
-				<button>Login in to Save</button>
+				<h1 className="recipe-info__title">{strMeal}</h1>
+				<img src={strMealThumb} alt={strMeal} className="recipe-info__image" />
 			</div>
-		</Fragment>
+			<div className="recipe-info__ingredients">
+				<h3>Ingredients</h3>
+				<ul>
+					{ingredients.map((ingredient) => {
+						return <li>{ingredient}</li>;
+					})}
+				</ul>
+			</div>
+			<div className="recipe-info__instructions">
+				<h3>Instructions</h3> {strInstructions}
+			</div>
+			<div recipe-info__button>
+				<button>Save Recipe</button>
+			</div>
+		</div>
 	);
 };
 

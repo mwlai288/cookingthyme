@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
 
 const SignIn = (props) => {
@@ -31,41 +32,33 @@ const SignIn = (props) => {
 	};
 
 	return (
-		<div className="form-container">
-			<h1>
-				Account <span className="text-primary">Login</span>
-			</h1>
+		<div className="form-container signin-container">
 			<form onSubmit={onSubmit}>
-				<div className="form-group">
-					<label htmlFor="email">Email Address</label>
-					<input
-						id="email"
-						type="email"
-						name="email"
-						value={email}
-						onChange={onChange}
-						required
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="password">Password</label>
-					<input
-						id="password"
-						type="password"
-						name="password"
-						value={password}
-						onChange={onChange}
-						required
-					/>
-				</div>
+				<h1>Account Login</h1>
 				<input
-					type="submit"
-					value="Login"
-					className="btn btn-primary btn-block"
+					id="email"
+					type="email"
+					name="email"
+					value={email}
+					onChange={onChange}
+					placeholder="Enter Email"
+					required
 				/>
+
+				<input
+					id="password"
+					type="password"
+					name="password"
+					value={password}
+					onChange={onChange}
+					placeholder="Enter password"
+					required
+				/>
+
+				<button type="submit">Login</button>
 			</form>
 		</div>
 	);
 };
 
-export default SignIn;
+export default withRouter(SignIn);

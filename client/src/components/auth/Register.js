@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import { withRouter } from 'react-router-dom';
 
 const Register = (props) => {
 	const [user, setUser] = useState({
@@ -32,46 +33,41 @@ const Register = (props) => {
 	};
 
 	return (
-		<div className="form-container">
-			<h1>
-				Account <span className="text-primary">Register</span>
-			</h1>
+		<div className="form-container signup-container">
 			<form onSubmit={onSubmit}>
-				<div className="form-group">
-					<input
-						type="text"
-						name="email"
-						value={email}
-						placeholder="Enter email"
-						onChange={onChange}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						type="password"
-						name="password"
-						value={password}
-						placeholder="Enter a password"
-						onChange={onChange}
-					/>
-				</div>
-				<div className="form-group">
-					<input
-						type="password"
-						name="password2"
-						value={password2}
-						placeholder="Confirm password"
-						onChange={onChange}
-					/>
-				</div>
+				<h1>Account Register</h1>
+				<input
+					type="text"
+					name="email"
+					value={email}
+					placeholder="Enter email"
+					onChange={onChange}
+				/>
+
+				<input
+					type="password"
+					name="password"
+					value={password}
+					placeholder="Enter a password"
+					onChange={onChange}
+				/>
+
+				<input
+					type="password"
+					name="password2"
+					value={password2}
+					placeholder="Confirm password"
+					onChange={onChange}
+				/>
 				<small>
 					Passwords must be a length of 6 or greater, one capital and one
 					special character(!@#$%^&*).
 				</small>
-				<input type="submit" value="Register" />
+				<button type="submit">Register</button>
+				{/* <input type="submit" value="Register" /> */}
 			</form>
 		</div>
 	);
 };
 
-export default Register;
+export default withRouter(Register);
